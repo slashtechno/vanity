@@ -17,8 +17,10 @@ clock = pygame.time.Clock()
 SCREEN_WIDTH = 650
 SCREEN_HEIGHT = 500
 # Before 3 do the video
-office_scenes = [0, 1, 2, 4, 5, 6]
+office_scenes = {0: "office0.png", 1: "office1.png", 2: "office2.png", 4: "office3.png", 5: "office4.png", 6: "office5.png"}
+video_scenes = [3]
 LAST_STEP = 6
+recent_step = 0 
 screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
 pygame.display.set_caption("vanity")
 
@@ -31,17 +33,17 @@ step = 0
 def increment_step(s: pygame.Surface = None):
     global step
     step += 1
-    if step not in office_scenes:
-        screen.fill((0, 0, 0))
-    if step > LAST_STEP:
-        ...
+    # if step not in office_scenes:
+    #     screen.fill((0, 0, 0))
+    # if step > LAST_STEP:
+    #     ...
         
        
 
 def game_loop():
     """This function runs our main game loop, yippie!"""
-    global frame, step, last_click_time
-    pygame.mixer.music.load(f"  {ASSETS}/vanity.mp3")
+    global frame, step, last_click_time, recent_step
+    pygame.mixer.music.load(f"{ASSETS}/vanity.mp3")
     pygame.mixer.music.play(-1)
 
     greedy_button = Button(325, 430, None, lambda: increment_step(), ())
@@ -75,11 +77,13 @@ def game_loop():
                         pygame.quit()
                         sys.exit()
 
+        if recent_step != step:
+            recent_step = step
+            print(f"Step: {step}")
         greedy_button.update(mx, my, clicked)
-
         screen.fill('black')
         if (step in office_scenes):
-            office = pygame.image.load(f"{SPRITES}/office{office_scenes.index(step)}.png")
+            office = pygame.image.load(f"{SPRITES}/{office_scenes[step]}")
             screen.blit(office, (0, 0))
             greedy_button.draw(screen)
         elif step > LAST_STEP:
