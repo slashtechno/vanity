@@ -19,15 +19,8 @@ screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
 pygame.display.set_caption("vanity")
 
 
-frame = 0
-
-score = 0
-top_score = 0
-
-# Some RGB values we might want to use
-DARK_GREEN = (0, 150, 0)
-SKY_BLUE = (105, 186, 255)
-WHITE = (255, 255, 255)
+last_click_time = 0  # Variable to store the time of the last click
+click_cooldown = 0.5  # Cooldown period in seconds
 
 step = 0
 
@@ -42,7 +35,7 @@ def increment_step(s: pygame.Surface = None):
 
 def game_loop():
     """This function runs our main game loop, yippie!"""
-    global frame, step
+    global frame, step, last_click_time
     greedy_button = Button(50, 220, None, lambda: increment_step(), ())
     running = True
     start_time = time.time()
@@ -58,8 +51,20 @@ def game_loop():
                 pygame.quit()
                 sys.exit()
             elif event.type == pygame.MOUSEBUTTONDOWN:
+                current_time = time.time()
                 if event.button == 1:
-                    clicked = True
+                    if current_time - last_click_time > click_cooldown:
+                        clicked = True
+                        last_click_time = current_time
+            if step > 5:
+                if event.type == pygame.KEYDOWN:
+                    if event.key == pygame.K_r:
+                        step = 0
+                        start_time = time.time()
+                    elif event.key == pygame.K_q:
+                        running = False
+                        pygame.quit()
+                        sys.exit()
 
         greedy_button.update(mx, my, clicked)
 
@@ -69,9 +74,14 @@ def game_loop():
             screen.blit(office, (0, 0))
             greedy_button.draw(screen)
         else:
-            text = FONT.render("All is vanity.", True, (255, 255, 255))
-            text_rect = text.get_rect(center=(screen.get_width() / 2, screen.get_height() / 2))
-            screen.blit(text, text_rect)
+            text = []
+            text.append(FONT.render("All is vanity.", True, (255, 255, 255)))
+            text.append(FONT.render("Press R to restart, or Q to quit.", True, (255, 255, 255)))
+            y_offset = 40  # Starting y position
+            for text_line in text:
+                text_rect = text_line.get_rect(center=(screen.get_width() / 2, y_offset))
+                screen.blit(text_line, text_rect)
+                y_offset += text_line.get_height() + 10  # Move down for the next line
 
         if elapsed_time < 3:
             text = FONT.render("You have one job. Push the button.", True, (255, 255, 255))
