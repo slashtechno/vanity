@@ -1,7 +1,9 @@
 # Importing libraries that we'll be using
+import time
 import pygame
 import sys
 from button import Button
+from constants import FONT
 
 # Initializing pygame
 pygame.init()
@@ -29,19 +31,24 @@ WHITE = (255, 255, 255)
 
 step = 0
 
-def increment_step():
+def increment_step(s: pygame.Surface = None):
     global step
     step += 1
+    if step > 5:
+        screen.fill((0, 0, 0))
+        
+       
+
 
 def game_loop():
     """This function runs our main game loop, yippie!"""
     global frame, step
     greedy_button = Button(50, 220, None, lambda: increment_step(), ())
     running = True
+    start_time = time.time()
     while running:
-        # Here is an instance of event handling, checking if the user wants to exit
         clock.tick(60)
-
+        elapsed_time = time.time() - start_time
         mx, my = pygame.mouse.get_pos()
         clicked = False
 
@@ -57,10 +64,19 @@ def game_loop():
         greedy_button.update(mx, my, clicked)
 
         screen.fill('black')
-        office = pygame.image.load(f"sprites/office{step}.png")
-        screen.blit(office, (0, 0))
+        if step <= 5:
+            office = pygame.image.load(f"sprites/office{step}.png")
+            screen.blit(office, (0, 0))
+            greedy_button.draw(screen)
+        else:
+            text = FONT.render("All is vanity.", True, (255, 255, 255))
+            text_rect = text.get_rect(center=(screen.get_width() / 2, screen.get_height() / 2))
+            screen.blit(text, text_rect)
 
-        greedy_button.draw(screen)
+        if elapsed_time < 3:
+            text = FONT.render("You have one job. Push the button.", True, (255, 255, 255))
+            text_rect = text.get_rect(center=(screen.get_width() / 2, 40 + text.get_height() / 2))
+            screen.blit(text, text_rect)
 
         pygame.display.flip()
 
