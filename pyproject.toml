@@ -13,6 +13,7 @@ python = "^3.12"
 pygame = "^2.6.1"
 
 # Scripts
+pyvidplayer2 = "^0.9.24"
 [tool.poetry.scripts]
 vanity = "vanity.__main__:main"
 
