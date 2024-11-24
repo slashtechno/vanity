@@ -2,8 +2,8 @@
 import time
 import pygame
 import sys
-from button import Button
-from constants import FONT
+from vanity.button import Button
+from vanity.constants import FONT
 
 # Initializing pygame
 pygame.init()
@@ -38,7 +38,7 @@ def game_loop():
     pygame.mixer.music.load('vanity.mp3')
     pygame.mixer.music.play(-1)
 
-    greedy_button = Button(50, 220, None, lambda: increment_step(), ())
+    greedy_button = Button(325, 430, None, lambda: increment_step(), ())
     running = True
     start_time = time.time()
     while running:

@@ -1,4 +1,4 @@
-from constants import *
+from vanity.constants import *
 
 class Button:
     def __init__(self, x, y, text, func, args=()) -> None:

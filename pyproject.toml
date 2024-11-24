@@ -1,0 +1,21 @@
+[tool.poetry]
+name = "vanity"
+version = "0.1.0"
+description = ""
+authors = ["slashtechno <77907286+slashtechno@users.noreply.github.com>"]
+readme = "README.md"
+packages = [
+    { include = "vanity", from = "." }
+]
+
+[tool.poetry.dependencies]
+python = "^3.12"
+pygame = "^2.6.1"
+
+# Scripts
+[tool.poetry.scripts]
+vanity = "vanity.__main__:main"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
