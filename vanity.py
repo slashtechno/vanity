@@ -27,12 +27,16 @@ DARK_GREEN = (0, 150, 0)
 SKY_BLUE = (105, 186, 255)
 WHITE = (255, 255, 255)
 
+step = 0
+
+def increment_step():
+    global step
+    step += 1
 
 def game_loop():
     """This function runs our main game loop, yippie!"""
-    global frame
-    step = 0
-    greedy_button = Button(50, 220, None, lambda: print("I'm greedy!"), ())
+    global frame, step
+    greedy_button = Button(50, 220, None, lambda: increment_step(), ())
     running = True
     while running:
         # Here is an instance of event handling, checking if the user wants to exit
