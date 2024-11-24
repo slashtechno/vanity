@@ -32,10 +32,12 @@ def increment_step(s: pygame.Surface = None):
         
        
 
-
 def game_loop():
     """This function runs our main game loop, yippie!"""
     global frame, step, last_click_time
+    pygame.mixer.music.load('vanity.mp3')
+    pygame.mixer.music.play(-1)
+
     greedy_button = Button(50, 220, None, lambda: increment_step(), ())
     running = True
     start_time = time.time()
