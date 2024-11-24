@@ -3,7 +3,7 @@ import time
 import pygame
 import sys
 from vanity.button import Button
-from vanity.constants import FONT
+from vanity.constants import FONT, ASSETS, SPRITES
 
 # Initializing pygame
 pygame.init()
@@ -35,7 +35,7 @@ def increment_step(s: pygame.Surface = None):
 def game_loop():
     """This function runs our main game loop, yippie!"""
     global frame, step, last_click_time
-    pygame.mixer.music.load('vanity.mp3')
+    pygame.mixer.music.load(f"{ASSETS}/vanity.mp3")
     pygame.mixer.music.play(-1)
 
     greedy_button = Button(325, 430, None, lambda: increment_step(), ())
@@ -71,11 +71,11 @@ def game_loop():
         greedy_button.update(mx, my, clicked)
 
         screen.fill('black')
-        if step <= 5:
-            office = pygame.image.load(f"sprites/office{step}.png")
+        if (step <= 5):
+            office = pygame.image.load(f"{SPRITES}/office{step}.png")
             screen.blit(office, (0, 0))
             greedy_button.draw(screen)
-        else:
+        elif step > 5 :
             text = []
             text.append(FONT.render("All is vanity.", True, (255, 255, 255)))
             text.append(FONT.render("Press R to restart, or Q to quit.", True, (255, 255, 255)))

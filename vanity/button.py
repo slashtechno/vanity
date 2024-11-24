@@ -1,10 +1,12 @@
 import time
-from vanity.constants import *
-
+import importlib.resources as pkg_resources
+from vanity.constants import FONT, ASSETS, SPRITES
+import pygame
+# print(ASSETS, SPRITES)
 class Button:
-    def __init__(self, x, y, text, func, args=()) -> None:
-        self.image_normal = pygame.image.load("sprites/button-normal.png")
-        self.image_pressed = pygame.image.load("sprites/button-pressed.png")
+    def __init__(self, x, y, text, func, args=(), image_normal=f"{SPRITES}/button-normal.png", image_pressed=f"{SPRITES}/button-pressed.png"):
+        self.image_normal = pygame.image.load(f"{SPRITES}/button-normal.png") 
+        self.image_pressed = pygame.image.load(f"{SPRITES}/button-pressed.png")
         self.image = self.image_normal
         self.last_click_time = 0  
         self.press_duration = 0.5
