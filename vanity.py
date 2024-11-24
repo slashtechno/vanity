@@ -16,7 +16,6 @@ SCREEN_HEIGHT = 500
 screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
 pygame.display.set_caption("vanity")
 
-office = pygame.image.load("sprites/office.png")
 
 frame = 0
 
@@ -32,7 +31,8 @@ WHITE = (255, 255, 255)
 def game_loop():
     """This function runs our main game loop, yippie!"""
     global frame
-    greedy_button = Button(75, 205, "My Button", lambda: print("I'm greedy!"), ())
+    step = 0
+    greedy_button = Button(50, 220, None, lambda: print("I'm greedy!"), ())
     running = True
     while running:
         # Here is an instance of event handling, checking if the user wants to exit
@@ -53,6 +53,7 @@ def game_loop():
         greedy_button.update(mx, my, clicked)
 
         screen.fill('black')
+        office = pygame.image.load(f"sprites/office{step}.png")
         screen.blit(office, (0, 0))
 
         greedy_button.draw(screen)

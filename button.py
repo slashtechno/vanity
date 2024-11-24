@@ -38,4 +38,5 @@ class Button:
 
         pygame.draw.rect(screen, 'green' if self.hover else 'red', self.rect, 1)
 
-        screen.blit(t := FONT.render(self.text, True, 'white'), (self.x + self.rect.w // 2 - t.get_width() // 2, self.y + self.rect.h // 2 - t.get_height() // 2))
+        if self.text:
+            screen.blit(t := FONT.render(self.text, True, 'white'), (self.x + self.rect.w // 2 - t.get_width() // 2, self.y + self.rect.h // 2 - t.get_height() // 2))
