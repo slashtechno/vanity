@@ -17,12 +17,13 @@ clock = pygame.time.Clock()
 SCREEN_WIDTH = 650
 SCREEN_HEIGHT = 500
 # Before 3 do the video
-office_scenes = {0: "office0.png", 1: "office1.png", 2: "office2.png", 4: "office3.png", 5: "office4.png", 6: "office5.png"}
-video_scenes = [3]
+office_scenes = {0: "office0.png", 1: "office1.png", 2: "office2.png", 3: "office3.png", 5: "office4.png", 6: "office5.png"}
+video_scenes = {4: "protest-fire.mp4"}
 LAST_STEP = 6
 recent_step = 0 
 screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
-pygame.display.set_caption("vanity")
+pygame.display.set_caption("Vanity")
+# pygame.display.set_icon(pygame.image.load(f"{SPRITES}/icon.png"))
 
 
 last_click_time = 0  # Variable to store the time of the last click
@@ -79,7 +80,7 @@ def game_loop():
 
         if recent_step != step:
             recent_step = step
-            print(f"Step: {step}")
+            # print(f"Step: {step}")
         greedy_button.update(mx, my, clicked)
         screen.fill('black')
         if (step in office_scenes):
@@ -96,11 +97,10 @@ def game_loop():
                 screen.blit(text_line, text_rect)
                 y_offset += text_line.get_height() + 10  # Move down for the next line
         else:
-            match step:
-                case 3:
-                    vid = Video(f"{ASSETS}/protest-fire.mp4")
-                    play_vid(vid, screen)
-                    step+=1
+            print(step)
+            vid = Video(f"{ASSETS}/vid{step}.mp4")
+            play_vid(vid, screen)
+            step+=1
                    
                     
         if elapsed_time < 3:
