@@ -1,0 +1,5 @@
+> Vanity, said the preacher, all is vanity. This is a quote from the 'Book of Ecclesiastes'; while I myself am not religious, I find a great deal of resonance with this saying. It is meant to highlight and admonish the value that we as a community put into the pursuit of earthly pleasures. We show this message in the game by the act of pushing a button. It's a rather simple action, nearly inconsequential, encouraged even. with each press of the button the world around the player deteriorates, but the player is encouraged with small gifts and words of affirmation to keep pressing the button. In our small game, the passage of time is only encouraged through the push of the button, and you as the player have one job. Push the button. Will you be content with leaving things as they are? Or will your curiosity and greed get the better of you? After all, you are your own enemy.
+
+\- Jaydon Askew
+
+Artwork and music by Jaydon Askew. Programming by Angad Behl. Shoutout to CmdrApollo for helping create the button.
